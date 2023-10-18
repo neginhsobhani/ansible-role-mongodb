@@ -1,0 +1,23 @@
+- name: Template a file to /etc/file.conf
+  ansible.builtin.template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    force: yes
+
+- name: Restarting mongodb
+  systemd:
+    name: mongod
+    enabled: yes
+    daemon_reload: yes
+
+
+- name: Create replica set 
+  community.mongodb.mongodb_replicaset:
+    login_user: admin
+    login_password: pass
+    replica_set: test_replicaset
+    members:
+    - "{{ mongo0 }}:27017"
+    - "{{ mongo1 }}:27017"
+    - "{{ mongo2 }}:27017"
+  when: inventory_hostname == "{{ groups['all'] | first }}"

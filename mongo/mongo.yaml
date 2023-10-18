@@ -1,0 +1,21 @@
+- hosts: all
+  become: true
+  become_user: root
+
+
+  tasks:
+  #   - name: Install MongoDB
+  #     include_role:
+  #       name: install
+    
+    # - name: Starting MongoDB service
+    #   include_role:
+    #     name: service
+
+    # - name: Creating administrative user 
+    #   include_role:
+    #     name: create-user
+    
+    - name: Creating Replicaset 
+      include_role:
+        name: replicaset

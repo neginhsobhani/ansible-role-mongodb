@@ -1,0 +1,13 @@
+- name: Installing pre-required packages 
+  import_tasks: prerequirment.yaml
+
+- name: Create administrative user 
+  mongodb_user:
+    database: admin
+    name: "{{ mongodb_user_admin_name }}"
+    password: "{{ mongodb_user_admin_password }}"
+    update_password: "{{ mongodb_user_update_password }}"
+    roles: "userAdminAnyDatabase"
+    login_host: "{{ mongodb_net_bindip.split(',') | map('replace', '0.0.0.0', '127.0.0.1') | list  | first }}"
+    login_port: "{{ mongodb_net_port | int }}"
+  # no_log: true

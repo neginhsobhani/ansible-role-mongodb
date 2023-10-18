@@ -1,0 +1,21 @@
+- name: Update and upgrade apt packages
+  ansible.builtin.apt:
+    upgrade: yes
+    
+- name: Install prerequired packages #version
+  ansible.builtin.apt:
+    pkg:
+      - python3
+      - python3-pip
+      - python3-setuptools
+    state: present
+    update_cache: true
+    
+
+- name: Install pymongo python package specifically,
+  ansible.builtin.pip:
+    name: pymongo==4.5.0
+    executable: pip3
+
+
+  

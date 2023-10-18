@@ -1,0 +1,9 @@
+ - name: Just force systemd to reread configs 
+   ansible.builtin.systemd:
+    daemon_reload: true
+
+ - name: Starting mongodb service
+   ansible.builtin.service:
+    name: mongod.service
+    state: started
+    enabled: yes
