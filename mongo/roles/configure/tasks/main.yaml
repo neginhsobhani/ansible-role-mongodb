@@ -1,5 +1,21 @@
-- name: Generating Key File if not available
-  ansible.builtin.shell: 
-    cmd: curl -fsSL https://pgp.mongodb.com/server-7.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor
-    cmd: openssl rand -base64 741 
-    creates: /usr/share/keyrings/mongodb-server-7.0.gpg 
+- name: Create keyfile directory for MongoDB
+  ansible.builtin.file:
+    path: ~/mongo-auth
+    state: directory 
+    owner: mongodb
+    group: mongodb
+
+- name: Generate keyfile value 
+  ansible.builtin.command: openssl rand -base64 741
+  run_once: true
+  register: keyfilevalue
+
+- name: .:(Debian):. create keyfile
+  template:
+    src: keyfile.j2
+    dest: "{{ mongodb_keyfile_directory }}keyfile"
+    owner: mongodb
+    group: mongodb
+    mode: '400'
+
+

@@ -17,7 +17,7 @@
     login_password: pass
     replica_set: test_replicaset
     members:
-    - "{{ mongo0 }}:27017"
-    - "{{ mongo1 }}:27017"
-    - "{{ mongo2 }}:27017"
+    - "172.16.21.11:27017"
+    - "172.16.21.12:27017"
+    - "172.16.21.13:27017"
   when: inventory_hostname == "{{ groups['all'] | first }}"

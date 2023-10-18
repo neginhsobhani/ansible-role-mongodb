@@ -4,3 +4,5 @@ mongo1: 172.16.21.12
 mongo2: 172.16.21.13
 
 replicaSet_name: test_replicaset
+
+mongodb_keyfile_directory: /opt/mongodb
