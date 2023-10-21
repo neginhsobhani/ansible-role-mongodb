@@ -2,8 +2,8 @@
   ansible.builtin.file:
     path: /var/lib/mongo
     state: directory
-    owner: mongodb
-    group: mongodb
+    owner: root
+    group: root
 
 - name: Update and upgrade apt packages
   ansible.builtin.apt:

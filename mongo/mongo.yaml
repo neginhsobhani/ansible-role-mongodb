@@ -3,9 +3,12 @@
   become_user: root
 
   tasks:
-    - name: Install MongoDB
+    # - name: Install MongoDB
+    #   include_role:
+    #     name: install
+    - name: assserting
       include_role:
-        name: install
+        name: assert
 
     - name: Starting MongoDB service
       include_role:

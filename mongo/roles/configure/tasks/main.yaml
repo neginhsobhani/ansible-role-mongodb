@@ -2,8 +2,8 @@
   ansible.builtin.file:
     path: ~/mongo-auth
     state: directory 
-    owner: mongodb
-    group: mongodb
+    owner: root
+    group: root
 
 - name: Generate keyfile value 
   ansible.builtin.command: openssl rand -base64 741
@@ -14,8 +14,8 @@
   template:
     src: keyfile.j2
     dest: "{{ mongodb_keyfile_directory }}keyfile"
-    owner: mongodb
-    group: mongodb
+    owner: root
+    group: root
     mode: '400'
 
 
