@@ -9,33 +9,16 @@
     name: mongod.service
     state: started
     enabled: yes
-
-- name: cluster | build member list
-  set_fact:
-    members: >-
-      {{
-        members | default([]) +
-        [{
-          'host': item + ':{{ mongo_net.port }}',
-          'priority': member_weight[hostvars[item].mongo_replication_role]
-        }]
-      }}
-  loop: "{{ ansible_play_hosts }}"
-  run_once: true
-  vars:
-    member_weight:
-      primary: 3
-      secondary: 2
-      arbiter: 1
-
-
-- name: cluster | initial build
+ 
+      
+- name: Create replica set
   community.mongodb.mongodb_replicaset:
-    login_host: localhost
-    login_port: "{{ mongo_net.port }}"
+    login_host: 172.16.21.11
     login_user: admin
-    login_password: "{{ mongo_admin_pass }}"
-    replica_set: "{{ mongo_replication.replSetName }}"
-    members: "{{ members }}"
-    arbiter_at_index: 2
-  when: mongo_primary
+    login_password: pass
+    replica_set: test_replicaset
+    members:
+      - "172.16.21.11:27017"
+      - "172.16.21.12:27017"
+      - "172.16.21.13:27017"
+  when: groups.mongod.index(inventory_hostname) == 0
