@@ -7,8 +7,7 @@
 # Where and how to store data.
 storage:
   dbPath: /var/lib/mongo
-#  engine:
-#  wiredTiger:
+
 
 # where to write logging data.
 systemLog:
@@ -24,24 +23,8 @@ net:
 
 # how the process runs
 processManagement:
-  fork: true
   timeZoneInfo: /usr/share/zoneinfo
 
-
-#operationProfiling:
-
-# security
-security:
-  keyFile: /var/lib/mongo/keyfile
-  clusterAuthMode: keyFile
-  authorization: disabled
-  
 # replication
 replication:
   replSetName: '{{ replicaSet_name }}'
-
-#sharding:
-
-## Enterprise-Only Options
-
-#auditLog:

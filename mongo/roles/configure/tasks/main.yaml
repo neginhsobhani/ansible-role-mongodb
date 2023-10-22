@@ -1,9 +1,9 @@
 - name: Create keyfile directory for MongoDB
   ansible.builtin.file:
-    path: ~/mongo-auth
-    state: directory 
-    owner: root
-    group: root
+    path: /var/lib/mongo
+    state: directory
+    owner: mongodb
+    group: mongodb
 
 - name: Generate keyfile value 
   ansible.builtin.command: openssl rand -base64 741
@@ -13,9 +13,9 @@
 - name: .:(Debian):. create keyfile
   template:
     src: keyfile.j2
-    dest: "{{ mongodb_keyfile_directory }}keyfile"
-    owner: root
-    group: root
+    dest: /var/lib/mongo/keyfile
+    owner: mongodb
+    group: mongodb
     mode: '400'
 
 

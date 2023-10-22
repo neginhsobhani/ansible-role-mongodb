@@ -7,14 +7,6 @@
       include_role:
         name: install
   
-    - name: Starting MongoDB service
-      include_role:
-        name: service
-
-    - name: Creating administrative user
-      include_role:
-        name: create-user
-
     - name: Configuring
       include_role:
         name: configure
@@ -22,3 +14,8 @@
     - name: Creating Replicaset
       include_role:
         name: replicaset
+    
+    - name: Creating administrative user
+      include_role:
+        name: create-user
+

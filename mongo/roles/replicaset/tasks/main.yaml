@@ -1,8 +1,33 @@
+- name: cluster | build member list
+  set_fact:
+    members: >-
+      {{
+        members | default([]) +
+        [{
+          'host': item + ':27017',
+          'priority': member_weight[hostvars[item].mongo_replication_role]
+        }]
+      }}
+  loop: "{{ ansible_play_hosts }}"
+  run_once: true
+  vars:
+    member_weight:
+      primary: 3
+      secondary: 2
+      arbiter: 1
+
 - name: Template a file to /etc/file.conf
   ansible.builtin.template:
     src: mongod.conf.j2
     dest: /etc/mongod.conf
     force: yes
+    group: mongodb
+    owner: mongodb
+
+
+- name: Just force systemd to reread configs 
+  ansible.builtin.systemd:
+    daemon_reload: true
 
 - name: Starting mongodb service
   ansible.builtin.service:
@@ -10,15 +35,32 @@
     state: started
     enabled: yes
  
-      
 - name: Create replica set
   community.mongodb.mongodb_replicaset:
     login_host: 172.16.21.11
     login_user: admin
     login_password: pass
     replica_set: test_replicaset
-    members:
-      - "172.16.21.11:27017"
-      - "172.16.21.12:27017"
-      - "172.16.21.13:27017"
+    members: "{{ members }}"
+    arbiter_at_index: 2
   when: groups.mongod.index(inventory_hostname) == 0
+
+# - name: Template a file to /etc/file.conf
+#   ansible.builtin.template:
+#     src: mongod.conf.j2
+#     dest: /etc/mongod.conf
+#     force: yes
+#     group: mongodb
+#     owner: mongodb
+
+
+# - name: Just force systemd to reread configs 
+#   ansible.builtin.systemd:
+#     daemon_reload: true
+
+# - name: Starting mongodb service
+#   ansible.builtin.service:
+#     name: mongod.service
+#     state: started
+#     enabled: yes
+

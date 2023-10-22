@@ -1,10 +1,3 @@
-- name: Create keyfile directory for MongoDB
-  ansible.builtin.file:
-    path: /var/lib/mongo
-    state: directory
-    owner: root
-    group: root
-
 - name: Update and upgrade apt packages
   ansible.builtin.apt:
     upgrade: yes
@@ -53,3 +46,13 @@
     - mongodb-org-tools
     - mongodb-org-shell
     - mongodb-org-database-tools-extra
+
+ - name: Just force systemd to reread configs 
+   ansible.builtin.systemd:
+    daemon_reload: true
+
+ - name: Starting mongodb service
+   ansible.builtin.service:
+    name: mongod.service
+    state: started
+    enabled: yes

@@ -5,11 +5,10 @@ mongo2: 172.16.21.13
 
 replicaSet_name: test_replicaset
 
-mongodb_keyfile_directory: /opt/mongodb
+
 
 mongo_net:
   bindIp: 0.0.0.0
   port: 27017
 
 mongo_admin_pass: pass
-mongo_replication_role: ''
