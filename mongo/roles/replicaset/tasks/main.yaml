@@ -1,66 +1,52 @@
-- name: cluster | build member list
-  set_fact:
-    members: >-
-      {{
-        members | default([]) +
-        [{
-          'host': item + ':27017',
-          'priority': member_weight[hostvars[item].mongo_replication_role]
-        }]
-      }}
-  loop: "{{ ansible_play_hosts }}"
-  run_once: true
-  vars:
-    member_weight:
-      primary: 3
-      secondary: 2
-      arbiter: 1
+# - name: Installing pre-required packages
+#   import_tasks: prerequirment.yaml
+  
+# - name: cluster | build member list
+#   set_fact:
+#     members: >-
+#       {{
+#         members | default([]) +
+#         [{
+#           'host': item + ':27017',
+#           'priority': member_weight[hostvars[item].mongo_replication_role]
+#         }]
+#       }}
+#   loop: "{{ ansible_play_hosts }}"
+#   run_once: true
+#   vars:
+#     member_weight:
+#       primary: 3
+#       secondary: 2
+#       arbiter: 1
 
-- name: Template a file to /etc/file.conf
+- name: Template a file to /etc/file.conf 
   ansible.builtin.template:
-    src: mongod.conf.j2
+    src: mongod_temp.conf.j2
     dest: /etc/mongod.conf
     force: yes
-    group: mongodb
     owner: mongodb
+    group: mongodb
+    mode: '0644'
+  notify: 
+  - daemon reload
+  - restart mongod
 
+- name: Flush handlers
+  meta: flush_handlers
 
-- name: Just force systemd to reread configs 
-  ansible.builtin.systemd:
-    daemon_reload: true
-
-- name: Starting mongodb service
-  ansible.builtin.service:
-    name: mongod.service
-    state: started
-    enabled: yes
- 
 - name: Create replica set
   community.mongodb.mongodb_replicaset:
     login_host: 172.16.21.11
-    login_user: admin
-    login_password: pass
-    replica_set: test_replicaset
-    members: "{{ members }}"
-    arbiter_at_index: 2
+    replica_set: rs0
+    members:
+    - _id: 0
+      host: "172.16.21.11:27017"
+      priority: 1
+    - _id: 1
+      host: "172.16.21.12:27017"
+      priority: 0.5
+    - _id: 2
+      host: "172.16.21.13:27017"
+      priority: 0.5
+    # arbiter_at_index: 2
   when: groups.mongod.index(inventory_hostname) == 0
-
-# - name: Template a file to /etc/file.conf
-#   ansible.builtin.template:
-#     src: mongod.conf.j2
-#     dest: /etc/mongod.conf
-#     force: yes
-#     group: mongodb
-#     owner: mongodb
-
-
-# - name: Just force systemd to reread configs 
-#   ansible.builtin.systemd:
-#     daemon_reload: true
-
-# - name: Starting mongodb service
-#   ansible.builtin.service:
-#     name: mongod.service
-#     state: started
-#     enabled: yes
-

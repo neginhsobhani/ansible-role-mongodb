@@ -1,6 +1,21 @@
+- name: Create storage directory for MongoDB
+  ansible.builtin.file:
+    path: /var/lib/mongodb
+    state: directory
+    # owner: mongodb
+    # group: mongodb
+
+- name: Create log directory for MongoDB
+  ansible.builtin.file:
+    path: /var/log/mongodb
+    recurse: true
+    state: directory
+    owner: mongodb
+    group: mongodb
+
 - name: Create keyfile directory for MongoDB
   ansible.builtin.file:
-    path: /var/lib/mongo
+    path: /var/lib/mongo-auth
     state: directory
     owner: mongodb
     group: mongodb
@@ -13,9 +28,9 @@
 - name: .:(Debian):. create keyfile
   template:
     src: keyfile.j2
-    dest: /var/lib/mongo/keyfile
+    dest: /var/lib/mongo-auth/keyfile
     owner: mongodb
     group: mongodb
-    mode: '400'
+    mode: '0400'
 
 

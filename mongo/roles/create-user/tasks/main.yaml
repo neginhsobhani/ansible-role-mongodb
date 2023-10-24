@@ -1,16 +1,13 @@
-- name: Installing pre-required packages
-  import_tasks: prerequirment.yaml
-
 - name: Create administrative user
   mongodb_user:
     database: admin
-    name: "{{ mongodb_user_admin_name }}"
-    password: "{{ mongodb_user_admin_password }}"
-    update_password: "{{ mongodb_user_update_password }}"
-    roles: "userAdminAnyDatabase"
+    name: admin
+    password: pass
+    update_password: "on_create"
+    roles: root
     # login_host: "{{ mongodb_net_bindip.split(',') | map('replace', '0.0.0.0', '127.0.0.1') | list  | first }}"
-    login_host: 172.16.21.11
-    login_port: "{{ mongodb_net_port | int }}"
     # login_user: admin
     # login_password: pass #causes bug when uncommented
   # no_log: true
+  
+ 

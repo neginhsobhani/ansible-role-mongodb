@@ -9,3 +9,4 @@ mongodb_user_update_password: "on_create"
 mongodb_net_bindip: 0.0.0.0                    # Comma separated list of ip addresses to listen on
 mongodb_net_port: 27017                          
 
+replicaSet_name: test_replica

@@ -1,14 +1,1 @@
-# mongo replicaset members
-mongo0: 172.16.21.11
-mongo1: 172.16.21.12
-mongo2: 172.16.21.13
-
-replicaSet_name: test_replicaset
-
-
-
-mongo_net:
-  bindIp: 0.0.0.0
-  port: 27017
-
-mongo_admin_pass: pass
+replicaSet_name: rs0
