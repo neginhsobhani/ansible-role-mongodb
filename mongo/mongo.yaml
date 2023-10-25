@@ -7,9 +7,9 @@
     #   include_role:
     #     name: install
 
-    # - name: Configuring
-    #   include_role:
-    #     name: configure
+    - name: Configuring
+      include_role:
+        name: configure
 
     - name: Creating Replicaset
       include_role:

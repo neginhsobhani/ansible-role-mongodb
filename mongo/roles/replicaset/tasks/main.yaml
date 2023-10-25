@@ -36,7 +36,7 @@
 
 - name: Create replica set
   community.mongodb.mongodb_replicaset:
-    login_host: 172.16.21.11
+    login_host: 127.0.0.1
     replica_set: rs0
     members:
     - _id: 0
@@ -48,5 +48,4 @@
     - _id: 2
       host: "172.16.21.13:27017"
       priority: 0.5
-    # arbiter_at_index: 2
   when: groups.mongod.index(inventory_hostname) == 0

@@ -2,8 +2,8 @@
   ansible.builtin.file:
     path: /var/lib/mongodb
     state: directory
-    # owner: mongodb
-    # group: mongodb
+    owner: mongodb
+    group: mongodb
 
 - name: Create log directory for MongoDB
   ansible.builtin.file:
@@ -29,6 +29,7 @@
   template:
     src: keyfile.j2
     dest: /var/lib/mongo-auth/keyfile
+    force: false
     owner: mongodb
     group: mongodb
     mode: '0400'

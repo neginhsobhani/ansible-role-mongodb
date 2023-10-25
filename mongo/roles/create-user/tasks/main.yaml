@@ -3,11 +3,9 @@
     database: admin
     name: admin
     password: pass
-    update_password: "on_create"
+    replica_set: rs0
     roles: root
-    # login_host: "{{ mongodb_net_bindip.split(',') | map('replace', '0.0.0.0', '127.0.0.1') | list  | first }}"
-    # login_user: admin
-    # login_password: pass #causes bug when uncommented
+    # login_host: "{{ mongodb_net_bindip.split(',') | map('replace', '0.0.0.0', '127.0.0.1') | list  | first }}"  
   # no_log: true
   
  
