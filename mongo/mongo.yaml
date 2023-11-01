@@ -7,17 +7,17 @@
     #   include_role:
     #     name: install
 
-    - name: Configuring
-      include_role:
-        name: configure
-
-    - name: Creating Replicaset
-      include_role:
-        name: replicaset
-
-    # - name: Creating administrative user
+    # - name: Configuring
     #   include_role:
-    #     name: create-user
+    #     name: configure
+
+    # - name: Creating Replicaset
+    #   include_role:
+    #     name: replicaset
+
+    - name: Creating administrative user
+      include_role:
+        name: create-user
     
   handlers:
     - name: daemon reload

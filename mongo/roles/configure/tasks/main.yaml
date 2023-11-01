@@ -33,5 +33,3 @@
     owner: mongodb
     group: mongodb
     mode: '0400'
-
-

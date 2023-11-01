@@ -1,24 +1,3 @@
-# - name: Installing pre-required packages
-#   import_tasks: prerequirment.yaml
-  
-# - name: cluster | build member list
-#   set_fact:
-#     members: >-
-#       {{
-#         members | default([]) +
-#         [{
-#           'host': item + ':27017',
-#           'priority': member_weight[hostvars[item].mongo_replication_role]
-#         }]
-#       }}
-#   loop: "{{ ansible_play_hosts }}"
-#   run_once: true
-#   vars:
-#     member_weight:
-#       primary: 3
-#       secondary: 2
-#       arbiter: 1
-
 - name: Template a file to /etc/file.conf 
   ansible.builtin.template:
     src: mongod_temp.conf.j2
