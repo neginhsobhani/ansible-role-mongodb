@@ -1,0 +1,39 @@
+- name: Template a file to /etc/file.conf 
+  ansible.builtin.template:
+    src: templates/mongod_temp.conf.j2
+    dest: /etc/mongod.conf
+    force: yes
+    owner: mongodb
+    group: mongodb
+    mode: '0644'
+  notify: 
+  - daemon reload
+  - restart mongod
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Create replica set
+  community.mongodb.mongodb_replicaset:
+    login_host: 127.0.0.1
+    replica_set: "{{replicaSet_name}}"
+    members:
+    - _id: 0
+      host: "{{ mongo0['mongo_ip'] }}:27017"
+      priority: mongo0['mongo_priority'] 
+      tags:
+        cluster_role: mongo0['mongo_replication_role']
+
+    - _id: 1
+      host: "{{ mongo1['mongo_ip'] }}:27017"
+      priority: mongo1['mongo_priority'] 
+      tags:
+        cluster_role: mongo1['mongo_replication_role']
+
+    - _id: 2
+      host: "{{ mongo2['mongo_ip'] }}:27017"
+      priority: mongo2['mongo_priority'] 
+      tags:
+        cluster_role: mongo2['mongo_replication_role']
+    
+  when: groups.mongod.index(inventory_hostname) == 0

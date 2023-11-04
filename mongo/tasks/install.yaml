@@ -8,6 +8,19 @@
     state: present
     update_cache: true
 
+- name: Install prerequired packages #version
+  ansible.builtin.apt:
+    pkg:
+      - python3
+      - python3-pip
+      - python3-setuptools
+    state: present
+    update_cache: true
+    
+- name: Install pymongo python package specifically,
+  ansible.builtin.pip:
+    name: pymongo==4.5.0
+    executable: pip3
 - name: Import the MongoDB public GPG key
   ansible.builtin.shell:
     cmd: curl -fsSL https://pgp.mongodb.com/server-7.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor
@@ -46,3 +59,4 @@
     - mongodb-org-tools
     - mongodb-org-shell
     - mongodb-org-database-tools-extra
+    

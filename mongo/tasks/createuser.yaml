@@ -1,0 +1,9 @@
+- name: Create the user administrator
+  community.mongodb.mongodb_user:
+    database: admin
+    name: admin
+    password: pass
+    roles: root
+    login_host: 127.0.0.1
+  # no_log: true
+  when: groups.mongod.index(inventory_hostname) == 1

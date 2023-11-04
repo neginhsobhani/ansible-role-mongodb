@@ -25,9 +25,9 @@
   run_once: true
   register: keyfilevalue
 
-- name: .:(Debian):. create keyfile
+- name: Create keyfile
   template:
-    src: keyfile.j2
+    src: templates/keyfile.j2
     dest: /var/lib/mongo-auth/keyfile
     force: false
     owner: mongodb

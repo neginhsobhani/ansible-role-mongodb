@@ -1,0 +1,29 @@
+## mongo nodes
+mongo0:
+  mongo_ip: 172.16.21.11
+  mongo_replication_role: primary
+  mongo_priority: 2
+
+mongo1:
+  mongo_ip: 172.16.21.12
+  mongo_replication_role: secondary
+  mongo_priority: 1
+
+mongo2:
+  mongo_ip: 172.16.21.13
+  mongo_replication_role: ariter
+  mongo_priority: 0
+
+## mongo configuration
+mongodb_keyfile_directory: /opt/mongodb
+  
+## mongo authentication
+mongodb_user_admin_name: admin
+mongodb_user_admin_password: pass
+
+## mongo replication
+replicaSet_name: rs0
+
+## net Options
+mongodb_net_bindip: 0.0.0.0                   
+mongodb_net_port: 27017                          
