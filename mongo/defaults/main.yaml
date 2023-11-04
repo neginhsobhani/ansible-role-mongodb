@@ -1,22 +1,8 @@
-## mongo nodes
-mongo0:
-  mongo_ip: 172.16.21.11
-  mongo_replication_role: primary
-  mongo_priority: 2
-
-mongo1:
-  mongo_ip: 172.16.21.12
-  mongo_replication_role: secondary
-  mongo_priority: 1
-
-mongo2:
-  mongo_ip: 172.16.21.13
-  mongo_replication_role: ariter
-  mongo_priority: 0
-
 ## mongo configuration
-mongodb_keyfile_directory: /opt/mongodb
-  
+mongodb_keyfile_directory: /var/lib/mongo-auth
+mongodb_storage_directory: /var/lib/mongodb
+mongodb_log_directory: /var/log/mongodb
+
 ## mongo authentication
 mongodb_user_admin_name: admin
 mongodb_user_admin_password: pass
