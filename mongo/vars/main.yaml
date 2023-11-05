@@ -1,5 +1,6 @@
 ## mongo replication
 replicaSet_name: rs0
+
 # primary_count: 1
 # secondary_count: 1
 # arbiter_count: 1
