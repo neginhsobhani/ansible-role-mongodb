@@ -1,0 +1,16 @@
+- name: Check if cluster has one primary and at least one secondary
+  assert:
+    that:
+      - "{{ primary_count }} == 1"
+      - "{{ secondary_count }} >= 1 and {{ secondary_count }} < 3"
+      - "{{ arbiter_count }} >= 0 and {{ arbiter_count }} < 2"
+    fail_msg: "cluster with 3 nodes must have one primary and at least one secondary and at most one arbiter"
+  when: primary_count is defined and secondary_count is defined 
+
+
+# - name: Check replicaset name
+#   assert:
+#     that:
+#       - "{{ replicaSet_name }} != 'rs0'"
+#     msg: "replicaSet_name should not be equal to 'rs0'"
+#   when: replicaSet_name is defined

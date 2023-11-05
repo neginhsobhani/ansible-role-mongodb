@@ -19,21 +19,21 @@
     replica_set: "{{replicaSet_name}}"
     members:
     - _id: 0
-      host: "{{ mongo0['mongo_ip'] }}:27017"
-      priority: mongo0['mongo_priority'] 
+      host: "{{ mongo0['ansible_host'] }}:{{ mongodb_net_port }}"
+      priority: mongo0['mongo_node_priority'] 
       tags:
         cluster_role: mongo0['mongo_replication_role']
 
     - _id: 1
-      host: "{{ mongo1['mongo_ip'] }}:27017"
-      priority: mongo1['mongo_priority'] 
+      host: "{{ mongo1['ansible_host'] }}:{{ mongodb_net_port }}"
+      priority: mongo1['mongo_node_priority'] 
       tags:
         cluster_role: mongo1['mongo_replication_role']
 
     - _id: 2
-      host: "{{ mongo2['mongo_ip'] }}:27017"
-      priority: mongo2['mongo_priority'] 
+      host: "{{ mongo2['ansible_host'] }}:{{ mongodb_net_port }}"
+      priority: mongo2['mongo_node_priority'] 
       tags:
         cluster_role: mongo2['mongo_replication_role']
-    
+    arbiter_at_index: 2
   when: groups.mongod.index(inventory_hostname) == 0

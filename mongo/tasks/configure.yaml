@@ -28,7 +28,7 @@
 - name: Create keyfile
   ansible.builtin.template:
     src: templates/keyfile.j2
-    dest: "{{ mongodb_keyfile_directory/keyfile }}"
+    dest: "{{ mongodb_keyfile_directory }}/keyfile"
     force: false
     owner: mongodb
     group: mongodb

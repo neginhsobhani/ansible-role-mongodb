@@ -10,6 +10,11 @@ mongodb_user_admin_password: pass
 ## mongo replication
 replicaSet_name: rs0
 
+primary_count: 1
+secondary_count: 1
+arbiter_count: 1
+
+
 ## net Options
 mongodb_net_bindip: 0.0.0.0                   
 mongodb_net_port: 27017                          
