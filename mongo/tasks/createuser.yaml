@@ -5,5 +5,6 @@
     password: pass
     roles: root
     login_host: 127.0.0.1
+    create_for_localhost_exception: /var/log/mongodb/localexception
   # no_log: true
   when: groups.mongod.index(inventory_hostname) == 0 
