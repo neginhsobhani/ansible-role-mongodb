@@ -20,14 +20,15 @@
     members:
     - _id: 0
       host: "{{ hostvars[play_hosts[0]]['ansible_host'] }}:{{ mongodb_net_port }}"
-      priority: 2
+      priority: hostvars[play_hosts[0]]['mongo_node_priority'] | int
     
     - _id: 1
       host: "{{ hostvars[play_hosts[1]]['ansible_host'] }}:{{ mongodb_net_port }}"
-      priority: 1
+      priority: hostvars[play_hosts[1]]['mongo_node_priority'] | int
   
     - _id: 2
       host: "{{ hostvars[play_hosts[2]]['ansible_host'] }}:{{ mongodb_net_port }}"
-      priority: 0
+      priority: hostvars[play_hosts[2]]['mongo_node_priority'] | int
+
     arbiter_at_index: 2
   when: groups.mongod.index(inventory_hostname) == 0

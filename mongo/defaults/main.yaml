@@ -14,6 +14,8 @@ primary_count: 1
 secondary_count: 1
 arbiter_count: 1
 
+# the value can be either psa(primary,secondary,arbiter) or pss(primary,secondary,secondary)
+cluster_type: psa 
 
 ## net Options
 mongodb_net_bindip: 0.0.0.0                   
