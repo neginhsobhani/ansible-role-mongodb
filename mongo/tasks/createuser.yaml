@@ -6,4 +6,4 @@
     roles: root
     login_host: 127.0.0.1
   # no_log: true
-  when: groups.mongod.index(inventory_hostname) == 1 
+  when: groups.mongod.index(inventory_hostname) == 0 

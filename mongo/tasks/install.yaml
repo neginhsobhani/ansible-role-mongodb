@@ -2,13 +2,7 @@
   ansible.builtin.apt:
     upgrade: yes
 
-# - name: Check gnupg and curl installation
-#   ansible.builtin.apt:
-#     name: [gnupg, curl]
-#     state: present
-#     update_cache: true
-
-- name: Install prerequired packages #version
+- name: Install prerequired packages 
   ansible.builtin.apt:
     pkg:
       - gnupg
