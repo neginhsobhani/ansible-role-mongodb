@@ -1,6 +1,7 @@
 ## mongo configuration
 mongodb_keyfile_directory: /var/lib/mongo-auth
-mongodb_storage_directory: /var/lib/mongodb
+# mongodb_storage_directory: /var/lib/mongodb
+mongodb_storage_directory: /mnt/mongodb_data
 mongodb_log_directory: /var/log/mongodb
 
 ## mongo authentication
@@ -13,9 +14,6 @@ replicaSet_name: rs0
 primary_count: 1
 secondary_count: 1
 arbiter_count: 1
-
-# the value can be either psa(primary,secondary,arbiter) or pss(primary,secondary,secondary)
-cluster_type: psa 
 
 ## net Options
 mongodb_net_bindip: 0.0.0.0                   

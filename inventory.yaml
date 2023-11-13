@@ -13,8 +13,8 @@ mongod:
     mongo2:
       ansible_host: 172.16.21.13
       mongo_replication_role: arbiter
-      mongo_arbiter: true
-      mongo_node_priority: 0
+      mongo_arbiter: false
+      mongo_node_priority: 0.5
   vars:
     ansible_user: root
     ansible_connection: ssh

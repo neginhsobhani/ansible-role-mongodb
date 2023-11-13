@@ -4,7 +4,7 @@
       {{
         members | default([]) +
         [{
-          'host': item + ':27017',
+          'host': hostvars[item].ansible_host + ':{{ mongodb_net_port }}',
           'priority': member_weight[hostvars[item].mongo_replication_role]
         }]
       }}
@@ -16,6 +16,10 @@
       secondary: 1
       arbiter: 0
 
+- name: debug
+  debug:
+    msg: "{{ members }}"
+
 - name: cluster | set fact for arbiter index number
   set_fact:
     arbiter_index: "{{ hostid }}"
@@ -26,7 +30,7 @@
 
 - name: Template a file to /etc/file.conf 
   ansible.builtin.template:
-    src: templates/mongod_temp.conf.j2
+    src: templates/mongod.conf.j2
     dest: /etc/mongod.conf
     force: yes
     owner: mongodb
@@ -43,18 +47,6 @@
   community.mongodb.mongodb_replicaset:
     login_host: 127.0.0.1
     replica_set: "{{replicaSet_name}}"
-    # members:
-    # - _id: 0
-    #   host: "{{ hostvars[play_hosts[0]]['ansible_host'] }}:{{ mongodb_net_port }}"
-    #   priority: hostvars[play_hosts[0]]['mongo_node_priority'] | int
-    
-    # - _id: 1
-    #   host: "{{ hostvars[play_hosts[1]]['ansible_host'] }}:{{ mongodb_net_port }}"
-    #   priority: hostvars[play_hosts[1]]['mongo_node_priority'] | int
-  
-    # - _id: 2
-    #   host: "{{ hostvars[play_hosts[2]]['ansible_host'] }}:{{ mongodb_net_port }}"
-    #   priority: hostvars[play_hosts[2]]['mongo_node_priority'] | int
     members: "{{ members }}"
     arbiter_at_index: "{{ arbiter_index | default(omit) }}"
   when: groups.mongod.index(inventory_hostname) == 0
