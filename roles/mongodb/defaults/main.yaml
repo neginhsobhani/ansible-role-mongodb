@@ -1,5 +1,6 @@
 ## mongo configuration
 mongodb_keyfile_directory: /var/lib/mongo-auth
+
 # mongodb_storage_directory: /var/lib/mongodb
 mongodb_storage_directory: /mnt/mongodb_data
 mongodb_log_directory: /var/log/mongodb
