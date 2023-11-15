@@ -1,4 +1,4 @@
-- name: Check if cluster has one primary and at least one secondary
+- name: Asserion | Check if cluster has one primary and at least one secondary
   assert:
     that:
       - "{{ primary_count }} == 1"
@@ -8,7 +8,7 @@
   when: primary_count is defined and secondary_count is defined 
 
 
-# - name: Check replicaset name
+# - name: Asserion | Check replicaset name
 #   assert:
 #     that:
 #       - "{{ replicaSet_name }} != 'rs0'"

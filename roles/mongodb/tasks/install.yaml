@@ -4,18 +4,13 @@
 
 - name: Install prerequired packages 
   ansible.builtin.apt:
-    pkg:
-      - gnupg
-      - curl
-      - python3
-      - python3-pip
-      - python3-setuptools
+    pkg: "{{ required_pkg }}"
     state: present
     update_cache: true
     
 - name: Install pymongo python package specifically,
   ansible.builtin.pip:
-    name: pymongo==4.5.0
+    name: pymongo=={{ pymongo_version }}
     executable: pip3
     
 - name: Import the MongoDB public GPG key
@@ -31,14 +26,14 @@
 - name: Check mongodb-org installation
   ansible.builtin.apt:
     pkg:
-      - mongodb-org=7.0.1
-      - mongodb-org-database=7.0.1
-      - mongodb-org-server=7.0.1
-      - mongodb-mongosh=2.0.1
-      - mongodb-org-mongos=7.0.1
-      - mongodb-org-tools=7.0.1
-      - mongodb-org-shell=7.0.1
-      - mongodb-org-database-tools-extra=7.0.1
+      - mongodb-org={{ mongodb_org_version }}
+      - mongodb-org-database={{ mongodb_org_version }}
+      - mongodb-org-server={{ mongodb_org_version }}
+      - mongodb-mongosh={{ mongodb_mongosh_version }}
+      - mongodb-org-mongos={{ mongodb_org_version }}
+      - mongodb-org-tools={{ mongodb_org_version }}
+      - mongodb-org-shell={{ mongodb_org_version }}
+      - mongodb-org-database-tools-extra={{ mongodb_org_version }}
     state: present
     update_cache: true
     autoremove: yes
@@ -47,13 +42,5 @@
   ansible.builtin.dpkg_selections:
     name: "{{item}}"
     selection: hold
-  loop:
-    - mongodb-org
-    - mongodb-org-database
-    - mongodb-org-server
-    - mongodb-mongosh
-    - mongodb-org-mongos
-    - mongodb-org-tools
-    - mongodb-org-shell
-    - mongodb-org-database-tools-extra
+  loop: "{{ mongo_org_pkg }}"
     

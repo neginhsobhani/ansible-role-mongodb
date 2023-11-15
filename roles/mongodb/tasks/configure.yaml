@@ -1,4 +1,4 @@
-- name: Create storage, log and keyfile directory
+- name: Configure | Create storage, log and keyfile directory
   ansible.builtin.file:
     path: "{{ item.name }}"
     recurse: "{{ item.recurse }}"
@@ -6,26 +6,26 @@
     owner: mongodb
     group: mongodb
   loop:
-    - name: mongodb_directory.storage
+    - name: Configure | mongodb_directory.storage
       recurse: false
     - name: mongodb_directory.log
       recurse: true
     - name: mongodb_directory.keyfile
       recurse: false
 
-- name: Getting status of keyfile
+- name: Configure | Getting status of keyfile
   ansible.builtin.stat:
     path: "{{ mongodb_directory.keyfile }}/keyfile"
   register: st
 
-- name: Generate and create keyfile
+- name: Configure | Generate and create keyfile
   block:
-    - name: Generate keyfile value 
+    - name: Configure | Generate keyfile value 
       ansible.builtin.command: openssl rand -base64 741
       run_once: true
       register: keyfilevalue
 
-    - name: Create keyfile
+    - name: Configure | Create keyfile
       ansible.builtin.template:
         src: templates/keyfile.j2
         dest: "{{ mongodb_directory.keyfile }}/keyfile"

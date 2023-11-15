@@ -1,4 +1,4 @@
-- name: Create the user administrator
+- name: Create User | Create the user administrator
   community.mongodb.mongodb_user:
     database: admin
     name: "{{ mongodb_admin.name }}"

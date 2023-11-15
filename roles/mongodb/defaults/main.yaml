@@ -1,16 +1,38 @@
-## Mongo configuration
+## Mongodb installation config
+mongodb_org_version: 7.0.1
+mongodb_mongosh_version: 2.0.1
+pymongo_version: 4.5.0
+
+required_pkg:
+  - gnupg
+  - curl
+  - python3
+  - python3-pip
+  - python3-setuptools
+
+mongo_org_pkg:
+  - mongodb-org
+  - mongodb-org-database
+  - mongodb-org-server
+  - mongodb-mongosh
+  - mongodb-org-mongos
+  - mongodb-org-tools
+  - mongodb-org-shell
+  - mongodb-org-database-tools-extra
+
+## Mongodb configuration
 mongodb_directory:
   keyfile: /var/lib/mongo-auth
   storage: /var/lib/mongodb
   log: /var/log/mongodb
   localexception: /var/log/mongodb/localexception
 
-## Mongo authentication
+## Mongodb authentication
 mongodb_admin:
   name: admin
   password: pass
 
-## Mongo replication
+## Mongodb replication
 replicaSet_name: rs0
 
 ## Net Options
