@@ -34,6 +34,9 @@
     mode: '0644'
   notify: 
   - restart mongod
+- name: debug
+  debug:
+    msg: '{{mongodb_net.bindIp}}'
 
 - name: Flush handlers
   meta: flush_handlers

@@ -4,11 +4,11 @@
 # - name: Install MongoDB
 #   import_tasks: install.yaml
 
-# - name: Configuring
-#   import_tasks: configure.yaml
+- name: Configuring
+  import_tasks: configure.yaml
 
-- name: Creating Replicaset
-  import_tasks: replicaset.yaml
+# - name: Creating Replicaset
+#   import_tasks: replicaset.yaml
 
-- name: Creating administrative user
-  import_tasks: createuser.yaml
+# - name: Creating administrative user
+#   import_tasks: createuser.yaml
