@@ -4,7 +4,7 @@
       {{
         members | default([]) +
         [{
-          'host': hostvars[item].ansible_host + ':{{ mongodb_net_port }}',
+          'host': hostvars[item].ansible_host + ':{{ mongodb_net.port }}',
           'priority': member_weight[hostvars[item].mongo_replication_role]
         }]
       }}
@@ -33,7 +33,6 @@
     group: mongodb
     mode: '0644'
   notify: 
-  - daemon reload
   - restart mongod
 
 - name: Flush handlers

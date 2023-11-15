@@ -1,9 +1,0 @@
-namespace: infra
-name: mongodb
-version: 1.0.0
-readme: README.md
-authors:
-  - n.hajisobhani@tapsell.ir
-
-description: install and setup mongodb cluster
-repository: https://git.tapsell.ir/infrastructure/ansible-collections.git
