@@ -33,4 +33,4 @@
         owner: mongodb
         group: mongodb
         mode: '0400'
-  when: st.stat.exists and st.stat.size == 0
+  when: st.stat.exists == false or st.stat.size == 0
