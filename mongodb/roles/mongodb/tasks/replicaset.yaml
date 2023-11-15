@@ -16,10 +16,6 @@
       secondary: 1
       arbiter: 0
 
-- name: debug
-  debug:
-    msg: "{{ members }}"
-
 - name: cluster | set fact for arbiter index number
   set_fact:
     arbiter_index: "{{ hostid }}"

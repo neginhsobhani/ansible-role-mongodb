@@ -1,13 +1,13 @@
 - name: Create storage directory for MongoDB
   ansible.builtin.file:
-    path: "{{ mongodb_storage_directory }}"
+    path: "{{ mongodb_directory.storage }}"
     state: directory
     owner: mongodb
     group: mongodb
 
 - name: Create log directory for MongoDB
   ansible.builtin.file:
-    path: "{{ mongodb_log_directory }}"
+    path: "{{ mongodb_directory.log }}"
     recurse: true
     state: directory
     owner: mongodb
@@ -15,7 +15,7 @@
 
 - name: Create keyfile directory for MongoDB
   ansible.builtin.file:
-    path: "{{ mongodb_keyfile_directory }}"
+    path: "{{ mongodb_directory.keyfile }}"
     state: directory
     owner: mongodb
     group: mongodb
@@ -28,7 +28,7 @@
 - name: Create keyfile
   ansible.builtin.template:
     src: templates/keyfile.j2
-    dest: "{{ mongodb_keyfile_directory }}/keyfile"
+    dest: "{{ mongodb_directory.keyfile }}/keyfile"
     force: false
     owner: mongodb
     group: mongodb

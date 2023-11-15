@@ -1,0 +1,24 @@
+## Mongo configuration
+mongodb_directory:
+  keyfile: /var/lib/mongo-auth
+  storage: /var/lib/mongodb
+  log: /var/log/mongodb
+  localexception: /var/log/mongodb/localexception
+
+## Mongo authentication
+mongodb_admin:
+  name: admin
+  password: pass
+
+## Mongo replication
+replicaSet_name: rs0
+
+## Net Options
+mongodb_net:
+  bindIp: 0.0.0.0
+  port: 27017                        
+
+## Assertion parameters 
+primary_count: 1
+secondary_count: 1
+arbiter_count: 1

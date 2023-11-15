@@ -5,25 +5,25 @@
 
 #security:
 security:
-  keyFile: /var/lib/mongo-auth/keyfile
+  keyFile: '{{ mongodb_directory.keyfile }}/keyfile'
   clusterAuthMode: keyFile
   authorization: disabled
 
 # Where and how to store data.
 storage:
-  dbPath: /var/lib/mongodb
+  dbPath: '{{ mongodb_directory.storage }}'
 
 # where to write logging data.
 systemLog:
   logRotate: reopen
   destination: file
-  path: /var/log/mongodb/mongod.log
+  path: '{{ mongodb_directory.log }}/mongod.log'
   logAppend: true
   
 # network interfaces
 net:
-  port: 27017
-  bindIp: 0.0.0.0
+  port: '{{mongodb_net.port}}'
+  bindIp: '{{mongodb_net.bindIp}}'
 
 # how the process runs
 processManagement:

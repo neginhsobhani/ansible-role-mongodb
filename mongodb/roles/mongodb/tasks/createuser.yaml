@@ -1,10 +1,10 @@
 - name: Create the user administrator
   community.mongodb.mongodb_user:
     database: admin
-    name: admin
-    password: pass
+    name: "{{ mongodb_admin.name }}"
+    password: "{{ mongodb_admin.password }}"
     roles: root
     login_host: 127.0.0.1
-    create_for_localhost_exception: /var/log/mongodb/localexception
+    create_for_localhost_exception: "{{ mongodb_directory.localexception }}"
   # no_log: true
   when: groups.mongod.index(inventory_hostname) == 0 

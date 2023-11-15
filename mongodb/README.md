@@ -1,0 +1,1 @@
+# Ansible role to install and setup mongodb cluster with 3 nodes
