@@ -24,7 +24,7 @@
   loop_control:
     index_var: hostid
 
-- name: Template a file to /etc/file.conf 
+- name: Template a file to /etc/mongod.conf
   ansible.builtin.template:
     src: templates/mongod.conf.j2
     dest: /etc/mongod.conf
