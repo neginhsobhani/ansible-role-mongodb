@@ -1,29 +1,29 @@
-- name: Update and upgrade apt packages
+- name: Install | Update and upgrade apt packages
   ansible.builtin.apt:
     upgrade: yes
 
-- name: Install prerequired packages 
+- name: Install | Install prerequired packages 
   ansible.builtin.apt:
     pkg: "{{ required_pkg }}"
     state: present
     update_cache: true
     
-- name: Install pymongo python package specifically,
+- name: Install | Install pymongo python package specifically,
   ansible.builtin.pip:
     name: pymongo=={{ pymongo_version }}
     executable: pip3
     
-- name: Import the MongoDB public GPG key
+- name: Install | Import the MongoDB public GPG key
   ansible.builtin.shell:
     cmd: curl -fsSL https://pgp.mongodb.com/server-7.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor
     creates: /usr/share/keyrings/mongodb-server-7.0.gpg
 
-- name: Create list file for MongoDB
+- name: Install | Create list file for MongoDB
   ansible.builtin.copy:
     dest: /etc/apt/sources.list.d/mongodb-org-7.0.list
     content: "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/7.0 multiverse"
 
-- name: Check mongodb-org installation
+- name: Install | Check mongodb-org installation
   ansible.builtin.apt:
     pkg:
       - mongodb-org={{ mongodb_org_version }}
@@ -38,7 +38,7 @@
     update_cache: true
     autoremove: yes
 
-- name: Hold mongo-org package
+- name: Install | Hold mongo-org package
   ansible.builtin.dpkg_selections:
     name: "{{item}}"
     selection: hold
