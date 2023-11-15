@@ -27,8 +27,8 @@ net:
 
 # how the process runs
 processManagement:
-  fork: true
-  timeZoneInfo: /usr/share/zoneinfo
+  fork: '{{mongodb_pm.fork}}'
+  timeZoneInfo: '{{mongodb_pm.timeZoneInfo}}'
 
 # replication
 replication:

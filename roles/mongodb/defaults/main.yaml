@@ -16,8 +16,13 @@ replicaSet_name: rs0
 ## Net Options
 mongodb_net:
   bindIp: 0.0.0.0
-  port: 27017                        
+  port: 27017     
 
+## process management options
+mongodb_pm:
+  fork: true
+  timeZoneInfo: /usr/share/zoneinfo
+  
 ## Assertion parameters 
 primary_count: 1
 secondary_count: 1
