@@ -27,10 +27,10 @@ net:
 
 # how the process runs
 processManagement:
-  fork: '{{mongodb_pm.fork}}'
+  fork: true
   timeZoneInfo: '{{mongodb_pm.timeZoneInfo}}'
 
-# replication
+# replications
 replication:
   replSetName: '{{replicaSet_name}}'
   

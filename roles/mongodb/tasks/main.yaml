@@ -1,8 +1,8 @@
-- name: Assertion 
-  import_tasks: assertion.yaml
+# - name: Assertion 
+#   import_tasks: assertion.yaml
   
-- name: Install MongoDB
-  import_tasks: install.yaml
+# - name: Install MongoDB
+#   import_tasks: install.yaml
 
 - name: Configuring
   import_tasks: configure.yaml
