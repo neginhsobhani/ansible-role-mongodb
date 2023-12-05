@@ -8,9 +8,9 @@
   when: primary_count is defined and secondary_count is defined 
 
 
-# - name: Asserion | Check replicaset name
-#   assert:
-#     that:
-#       - "{{ replicaSet_name }} != 'rs0'"
-#     msg: "replicaSet_name should not be equal to 'rs0'"
-#   when: replicaSet_name is defined
+- name: Asserion | Check replicaset name
+  assert:
+    that:
+      - replicaSet_name != 'rs0'
+    msg: "replicaSet_name should not be equal to 'rs0'"
+  when: replicaSet_name is defined

@@ -1,7 +1,3 @@
-- name: Install | Update and upgrade apt packages
-  ansible.builtin.apt:
-    upgrade: yes
-
 - name: Install | Install prerequired packages 
   ansible.builtin.apt:
     pkg: "{{ required_pkg }}"

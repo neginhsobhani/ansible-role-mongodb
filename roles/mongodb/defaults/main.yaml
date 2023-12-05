@@ -42,7 +42,6 @@ mongodb_net:
 
 ## process management options
 mongodb_pm:
-  # fork: true
   timeZoneInfo: /usr/share/zoneinfo
   
 ## Assertion parameters 

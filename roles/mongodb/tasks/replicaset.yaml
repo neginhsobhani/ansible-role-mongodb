@@ -1,4 +1,4 @@
-- name: Replicaset | build member list
+- name: ReplicaSet | build member list
   set_fact:
     members: >-
       {{
@@ -16,7 +16,7 @@
       secondary: 1
       arbiter: 0
 
-- name: Replicaset | set fact for arbiter index number
+- name: ReplicaSet | set fact for arbiter index number
   set_fact:
     arbiter_index: "{{ hostid }}"
   when: hostvars[item]['mongo_arbiter']
@@ -24,7 +24,7 @@
   loop_control:
     index_var: hostid
 
-- name: Replicaset | Template a file to /etc/mongod.conf
+- name: ReplicaSet | Template a file to /etc/mongod.conf
   ansible.builtin.template:
     src: templates/mongod.conf.j2
     dest: /etc/mongod.conf
@@ -38,10 +38,10 @@
   debug:
     msg: '{{mongodb_net.bindIp}}'
 
-- name: Replicaset | Flush handlers
+- name: ReplicaSet | Flush handlers
   meta: flush_handlers
 
-- name: Replicaset | Create replica set
+- name: ReplicaSet | Create replica set
   community.mongodb.mongodb_replicaset:
     login_host: 127.0.0.1
     replica_set: "{{replicaSet_name}}"

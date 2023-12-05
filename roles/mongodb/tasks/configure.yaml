@@ -1,18 +1,18 @@
 - name: Configure | Create storage, log and keyfile directory
   ansible.builtin.file:
-    path: "{{ item.name }}"
+    path: "{{ item.dir_name }}"
     recurse: "{{ item.recurse }}"
     state: directory
     owner: mongodb
     group: mongodb
   loop:
-    - name: Configure | mongodb_directory.storage
+    - dir_name: "{{ mongodb_directory.storage }}"
       recurse: false
-    - name: mongodb_directory.log
+    - dir_name: "{{ mongodb_directory.log }}"
       recurse: true
-    - name: mongodb_directory.keyfile
+    - dir_name: "{{ mongodb_directory.keyfile }}"
       recurse: false
-
+    
 - name: Configure | Getting status of keyfile
   ansible.builtin.stat:
     path: "{{ mongodb_directory.keyfile }}/keyfile"
